@@ -1,0 +1,98 @@
+<!-- login_register.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nakatani</title>
+    <link rel="icon" type="image/png" href="images/Nakatani.png">
+    <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    .form-box { width: 300px; margin: auto; }
+    input, button { width: 100%; padding: 10px; margin: 5px 0; }
+    .tab { display: inline-block; margin: 10px; cursor: pointer; }
+    .tab.active { font-weight: bold; }
+    .hidden { display: none; }
+    .error { color: red; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+
+<div class="form-box">
+  <div>
+    <span class="tab active" id="showLogin">Вход</span> | 
+    <span class="tab" id="showRegister">Регистрация</span>
+  </div>
+
+  <div id="loginForm">
+    <input type="text" id="loginUsername" placeholder="Имя пользователя">
+    <input type="password" id="loginPassword" placeholder="Пароль">
+    <button onclick="login()">Войти</button>
+    <div id="loginError" class="error"></div>
+  </div>
+
+  <div id="registerForm" class="hidden">
+    <input type="text" id="registerUsername" placeholder="Имя пользователя">
+    <input type="password" id="registerPassword" placeholder="Пароль">
+    <button onclick="register()">Зарегистрироваться</button>
+    <div id="registerError" class="error"></div>
+  </div>
+</div>
+
+<script>
+  // Переключение между входом и регистрацией
+  document.getElementById('showLogin').onclick = () => {
+    document.getElementById('loginForm').classList.remove('hidden');
+    document.getElementById('registerForm').classList.add('hidden');
+    document.getElementById('showLogin').classList.add('active');
+    document.getElementById('showRegister').classList.remove('active');
+  };
+
+  document.getElementById('showRegister').onclick = () => {
+    document.getElementById('registerForm').classList.remove('hidden');
+    document.getElementById('loginForm').classList.add('hidden');
+    document.getElementById('showRegister').classList.add('active');
+    document.getElementById('showLogin').classList.remove('active');
+  };
+
+  function register() {
+    const username = document.getElementById('registerUsername').value.trim();
+    const password = document.getElementById('registerPassword').value;
+    const errorDiv = document.getElementById('registerError');
+
+    if (!username || !password) {
+      errorDiv.textContent = 'Заполните все поля.';
+      return;
+    }
+
+    if (localStorage.getItem(`user_${username}`)) {
+      errorDiv.textContent = 'Пользователь уже существует.';
+      return;
+    }
+
+    localStorage.setItem(`user_${username}`, JSON.stringify({ password }));
+    errorDiv.style.color = 'green';
+    errorDiv.textContent = 'Успешная регистрация! Перейдите на вкладку "Вход".';
+  }
+
+  function login() {
+    const username = document.getElementById('loginUsername').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    const errorDiv = document.getElementById('loginError');
+
+    const userData = JSON.parse(localStorage.getItem(`user_${username}`));
+
+    if (!userData) {
+      errorDiv.textContent = 'Пользователь не найден.';
+    } else if (userData.password !== password) {
+      errorDiv.textContent = 'Неверный пароль.';
+    } else {
+      localStorage.setItem('loggedInUser', username);
+      window.location.href = 'Profile.html';
+    }
+  }
+</script>
+
+</body>
+</html>

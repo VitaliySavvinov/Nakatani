@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Меню ресторана</title>
+    <link rel="icon" type="image/png" href="images/nakatani.png">
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul class="navbar">
+                <div class="navbar-left">
+                    <li><a href="login_register.html" class="button">Вход</a></li>
+                    <li><a href="Profile.html" class="button">Профиль</a></li>
+                    <li><a href="сайт.html" class="button">Главная</a></li>
+                </div>
+                <div class="navbar-center">
+                    <img src="images/nakatani.png" alt="Логотип Nakatani" class="navbar-logo">
+                </div>
+                <div class="navbar-right">
+                    <li><a href="menu.html" class="button">Меню</a></li>
+                    <li><a href="Delivery terms.html" class="button">Условия доставки</a></li>
+                    <!-- Кнопка корзины в шапке -->
+                     <!-- Корзина -->
+                    <button id="cart-button" class="cart-button">
+                        Корзина (<span id="cartCount">0</span>)
+                    </button>
+                
+                    <!-- Модальное окно корзины -->
+                    <div id="cartModal" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Ваша корзина</h2>
+                                <span class="close" id="closeCart">&times;</span>
+                            </div>
+                            <div class="modal-body">
+                                <div id="cartContent" class="cart-items">
+                                    <div class="empty-cart">Корзина пуста</div>
+                                </div>
+                                <div class="cart-total">
+                                    Итого: <span id="cartTotal">0</span> ₽
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="checkout.html" class="checkout-button">Оформить заказ</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Модальное окно корзины -->
+     <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Ваша корзина</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="cart-items" class="cart-items">
+                    <!-- Товар будут добавляться сюда динамически -->
+                     <div class="empty-cart">Ваша корзина пуста</div>
+                </div>
+                <div class="modal-footer">
+                    <button id="checkout-button" class="checkout-button">Оформить заказ</button>
+                </div>
+            </div>
+        </div>
+     </div>
+
+    <div class="menu-header">
+        <section id="menu">
+            <div id="specifications1">Здесь указаны характеристики</div>
+            <h1 class="subtitle">МЕНЮ</h1>
+            <h2 id="ru" class="subtitle">Японская кухня</h2>
+            <p>Японская кухня — национальная кухня японцев. Отличается предпочтением натуральных, минимально обработанных продуктов, широким применением морепродуктов, сезонностью, характерными блюдами, специфическими правилами оформления блюд.</p>
+        </section>
+    </div>
+
+    <!-- Основное меню -->
+    <section class="popular-dishes">
+        <div class="grid-dishes">
+            <div class="card-dish">
+                <div class="image-container">
+                    <div class="menu-item">
+                        <img src="images/Japan/Тонкацу.png" alt="Тонкацу">
+                        <p><b>Тонкацу</b><span class="small-text">(300гр.)</span></p>
+                        <p><span class="textcolor">Блюдо японской кухни, зажаренная во фритюре свинина.</span></p>
+                        <div class="price-container">
+                            <p><b>350 рублей</b></p>
+                            <div id="controls_Тонкацу">
+                                <button class="add-button-size" onclick="cart.addItem('Тонкацу', 350)">Добавить</button>
+                                <button class="quantity-control" id="removeBtn_Тонкацу" onclick="cart.decrementItem('Тонкацу')" style="display: none;">-</button>
+                                <span class="quantity-display" id="quantity_Тонкацу" style="display: none;">1</span>
+                                <button class="quantity-control" id="addBtn_Тонкацу" onclick="cart.incrementItem('Тонкацу', 350)" style="display: none;">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-dish">
+                <div class="image-container">
+                    <div class="menu-item"> 
+                        <img src="images/Japan/Соба.png" alt="Соба">
+                        <p><b>Соба</b><span class="small-text">(300гр.)</span></p>
+                        <p><span class="textcolor">Традиционная японская лапша из гречихи.</span></p>
+                        <div class="price-container">
+                            <p><b>500 рублей</b></p>
+                            <div id="controls_Соба">
+                                <button class="add-button-size" onclick="cart.addItem('Соба', 500)">Добавить</button>
+                                <button class="quantity-control" id="removeBtn_Соба" onclick="cart.decrementItem('Соба')" style="display: none;">-</button>
+                                <span class="quantity-display" id="quantity_Соба" style="display: none;">1</span>
+                                <button class="quantity-control" id="addBtn_Соба" onclick="cart.incrementItem('Соба', 500)" style="display: none;">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-dish">
+                <div class="image-container">
+                    <div class="menu-item"> 
+                        <img src="images/Japan/Суши.png" alt="Суши">
+                        <p><b>Суши</b><span class="small-text">(150гр.)</span></p>
+                        <p><span class="textcolor">Японское блюдо из риса с уксусом и морепродуктами.</span></p>
+                        <div class="price-container">
+                            <p><b>500 рублей</b></p>
+                            <div id="controls_Суши">
+                                <button class="add-button-size" onclick="cart.addItem('Суши', 500)">Добавить</button>
+                                <button class="quantity-control" id="removeBtn_Суши" onclick="cart.decrementItem('Соба')" style="display: none;">-</button>
+                                <span class="quantity-display" id="quantity_Суши" style="display: none;">1</span>
+                                <button class="quantity-control" id="addBtn_Суши" onclick="cart.incrementItem('Суши', 500)" style="display: none;">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-dish">
+                <div class="image-container">
+                    <div class="menu-item"> 
+                        <img src="images/Japan/Сашими.png" alt="Сашими">
+                        <p><b>Сашими</b><span class="small-text">(350гр.)</span></p>
+                        <p><span class="textcolor">Традиционное японское блюдо из сырой рыбы, нарезанной кусочками. Добавляя такие приправы, как васаби или имбирь, сашими становятся еще более вкусными.</span></p>
+                        <div class="price-container">
+                            <p><b>600 рублей</b></p>
+                            <div id="controls_Сашими">
+                                <button class="add-button-size" onclick="cart.addItem('Сашими', 600)">Добавить</button>
+                                <button class="quantity-control" id="removeBtn_Сашими" onclick="cart.decrementItem('Сашими')" style="display: none;">-</button>
+                                <span class="quantity-display" id="quantity_Сашими" style="display: none;">1</span>
+                                <button class="quantity-control" id="addBtn_Сашими" onclick="cart.incrementItem('Сашими', 600)" style="display: none;">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-dish">
+                <div class="image-container">
+                    <div class="menu-item"> 
+                        <img src="images/Japan/Онигири.png" alt="Онигири">
+                        <p><b>Онигири</b><span class="small-text">(150гр.)</span></p>
+                        <p><span class="textcolor">Небольшие колобки или треугольники из отваренного риса, фаршированные начинкой и плотно обвернутые в сушёные водоросли нори.</span></p>
+                        <div class="price-container">
+                            <p><b>400 рублей</b></p>
+                            <div id="controls_Онигири">
+                                <button class="add-button-size" onclick="cart.addItem('Онигири', 400)">Добавить</button>
+                                <button class="quantity-control" id="removeBtn_Онигири" onclick="cart.decrementItem('Онигири')" style="display: none;">-</button>
+                                <span class="quantity-display" id="quantity_Онигири" style="display: none;">1</span>
+                                <button class="quantity-control" id="addBtn_Онигири" onclick="cart.incrementItem('Онигири', 400)" style="display: none;">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-dish">
+                <div class="image-container">
+                    <div class="menu-item"> 
+                        <img src="images/Japan/Вагю.png" alt="Вагю">
+                        <p><b>Вагю</b><span class="small-text">(400гр.)</span></p>
+                        <p><span class="textcolor">Самая дорогостоящая мраморная говядина, специально выведенных в Японии мясных пород коров.</span></p>
+                        <div class="price-container">
+                            <p><b>1000 рублей</b></p>
+                            <div id="controls_Вагю">
+                                <button class="add-button-size" onclick="cart.addItem('Вагю', 1000)">Добавить</button>
+                                <button class="quantity-control" id="removeBtn_Вагю" onclick="cart.decrementItem('Вагю')" style="display: none;">-</button>
+                                <span class="quantity-display" id="quantity_Вагю" style="display: none;">1</span>
+                                <button class="quantity-control" id="addBtn_Вагю" onclick="cart.incrementItem('Вагю', 1000)" style="display: none;">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="menu-header">
+        <section id="menu">
+            <h2 id="ru" class="subtitle">Корейская кухня</h2>
+            <p>Корейская кухня — совокупность корейских национальных блюд. Её основа — рис, овощи, мясо и морепродукты, дополняемые яркими специями и насыщенными соусами.</p>
+        </section>
+    </div>
+
+    <section class="popular-dishes full-screen-section">
+        <section class="popular-dishes">
+            <div class="grid-dishes">
+                <div class="card-dish">
+                    <div class="image-container">
+                        <div class="menu-item"> 
+                            <img src="images/Korea/Кимчи.png" alt="Кимчи">
+                            <p><b>Кимчи</b><span class="small-text">(300гр.)</span></p>
+                            <p><span class="textcolor">Блюдо корейской кухни, представляющее собой остро приправленную квашенную капусту.</span></p>
+                            <div class="price-container">
+                                <p><b>350 рублей</b></p>
+                                <div id="controls_Кимчи">
+                                    <button class="add-button-size" onclick="cart.addItem('Кимчи', 350)">Добавить</button>
+                                    <button class="quantity-control" id="removeBtn_Кимчи" onclick="cart.decrementItem('Кимчи')" style="display: none;">-</button>
+                                    <span class="quantity-display" id="quantity_Кимчи" style="display: none;">1</span>
+                                    <button class="quantity-control" id="addBtn_Кимчи" onclick="cart.incrementItem('Кимчи', 350)" style="display: none;">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-dish">
+                    <div class="image-container">
+                        <div class="menu-item"> 
+                            <img src="images/Korea/Пибимпап.png" alt="Пибимпап">
+                            <p><b>Пибимпап</b><span class="small-text">(400гр.)</span></p>
+                            <p><span class="textcolor">Одно из популярнейших блюд традиционной корейской кухни. Название переводится как «рис с мясом и овощами».</span></p>
+                            <div class="price-container">
+                                <p><b>400 рублей</b></p>
+                                <div id="controls_Пибимпап">
+                                    <button class="add-button-size" onclick="cart.addItem('Пибимпап', 400)">Добавить</button>
+                                    <button class="quantity-control" id="removeBtn_Пибимпап" onclick="cart.decrementItem('Пибимпап')" style="display: none;">-</button>
+                                    <span class="quantity-display" id="quantity_Пибимпап" style="display: none;">1</span>
+                                    <button class="quantity-control" id="addBtn_Пибимпап" onclick="cart.incrementItem('Пибимпап', 400)" style="display: none;">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-dish">
+                    <div class="image-container">
+                        <div class="menu-item"> 
+                            <img src="images/Korea/Кимчи рамен.png" alt="Кимчи рамен">
+                            <p><b>Кимчи рамен</b><span class="small-text">(400гр.)</span></p>
+                            <p><span class="textcolor">Блюдо, в основе которого лежит японская лапша рамен и традиционное корейское блюдо кимчи.</span></p>
+                            <div class="price-container">
+                                <p><b>500 рублей</b></p>
+                                <div id="controls_Кимчи_рамен">
+                                    <button class="add-button-size" onclick="cart.addItem('Кимчи_рамен', 500)">Добавить</button>
+                                    <button class="quantity-control" id="removeBtn_Кимчи_рамен" onclick="cart.decrementItem('Кимчи_рамен')" style="display: none;">-</button>
+                                    <span class="quantity-display" id="quantity_Кимчи_рамен" style="display: none;">1</span>
+                                    <button class="quantity-control" id="addBtn_Кимчи_рамен" onclick="cart.incrementItem('Кимчи_рамен', 500)" style="display: none;">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-dish">
+                    <div class="image-container">
+                        <div class="menu-item"> 
+                            <img src="images/Korea/Пульгоки.png" alt="Пульгоки">
+                            <p><b>Пульгоки</b><span class="small-text">(400гр.)</span></p>
+                            <p><span class="textcolor">Говядина, выдержанная в маринаде из кунжутного масла, кунжута, соевого соуса, зелёного лука, чеснока и имбиря, и приготовленная на решётке или на сковороде-гриль.</span></p>
+                            <div class="price-container">
+                                <p><b>500 рублей</b></p>
+                                <div id="controls_Пульгоки">
+                                    <button class="add-button-size" onclick="cart.addItem('Пульгоки', 500)">Добавить</button>
+                                    <button class="quantity-control" id="removeBtn_Пульгоки" onclick="cart.decrementItem('Пульгоки')" style="display: none;">-</button>
+                                    <span class="quantity-display" id="quantity_Пульгоки" style="display: none;">1</span>
+                                    <button class="quantity-control" id="addBtn_Пульгоки" onclick="cart.incrementItem('Пульгоки', 500)" style="display: none;">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-dish">
+                    <div class="image-container">
+                        <div class="menu-item"> 
+                            <img src="images/Korea/Кимбап.png" alt="Кимбап">
+                            <p><b>Кимбап</b><span class="small-text">(400гр.)</span></p>
+                            <p><span class="textcolor">Корейские роллы с омлетом и говядиной.</span></p>
+                            <div class="price-container">
+                                <p><b>350 рублей</b></p>
+                                <div id="controls_Кимбап">
+                                    <button class="add-button-size" onclick="cart.addItem('Кимбап', 350)">Добавить</button>
+                                    <button class="quantity-control" id="removeBtn_Кимбап" onclick="cart.decrementItem('Кимбап')" style="display: none;">-</button>
+                                    <span class="quantity-display" id="quantity_Кимбап" style="display: none;">1</span>
+                                    <button class="quantity-control" id="addBtn_Кимбап" onclick="cart.incrementItem('Кимбап', 350)" style="display: none;">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-dish">
+                    <div class="image-container">
+                        <div class="menu-item"> 
+                            <img src="images/Korea/Токпокки.png" alt="Токпокки">
+                            <p><b>Токпокки</b><span class="small-text">(200гр.)</span></p>
+                            <p><span class="textcolor">Классические рисовые палочки в остром соусе с добавлением копченых сосисок и яйца.</span></p>
+                            <div class="price-container">
+                                <p><b>350 рублей</b></p>
+                                <div id="controls_Токпокки">
+                                    <button class="add-button-size" onclick="cart.addItem('Токпокки', 350)">Добавить</button>
+                                    <button class="quantity-control" id="removeBtn_Токпокки" onclick="cart.decrementItem('Токпокки')" style="display: none;">-</button>
+                                    <span class="quantity-display" id="quantity_Токпокки" style="display: none;">1</span>
+                                    <button class="quantity-control" id="addBtn_Токпокки" onclick="cart.incrementItem('Токпокки', 350)" style="display: none;">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <div class="menu-header">
+        <section id="menu">
+            <h2 id="ru" class="subtitle">Вьетнамская кухня</h2>
+            <p>Вьетнамская кухня — это кухня, основанная на балансе вкусов, свежих ингредиентах и традиционном подходе к приготовлению блюд. Каждое блюдо сочетает в себе пять основных вкусов: сладкий, кислый, солёный, горький и острый.</p>
+        </section>
+    </div>
+
+    <section class="popular-dishes full-screen-section">
+        <section class="popular-dishes">
+            <div class="grid-dishes">
+                <div class="card-dish">
+                    <div class="image-container">
+                        <div class="menu-item"> 
+                            <img src="images/Vietnam/Фо-бо.png" alt="Фо-бо">
+                            <p><b>Фо-бо</b><span class="small-text">(400гр.)</span></p>
+                            <p><span class="textcolor">Традиционный вьетнамский суп, состоящий из наваристого мясного бульона, рисовой лапши и зелени.</span></p>
+                            <div class="price-container">
+                                <p><b>500 рублей</b></p>
+                                <div id="controls_Фо-бо">
+                                    <button class="add-button-size" onclick="cart.addItem('Фо-бо', 500)">Добавить</button>
+                                    <button class="quantity-control" id="removeBtn_Фо-бо" onclick="cart.decrementItem('Фо-бо')" style="display: none;">-</button>
+                                    <span class="quantity-display" id="quantity_Фо-бо" style="display: none;">1</span>
+                                    <button class="quantity-control" id="addBtn_Фо-бо" onclick="cart.incrementItem('Фо-бо', 500)" style="display: none;">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-dish">
+                    <div class="image-container">
+                        <div class="menu-item"> 
+                            <img src="images/Vietnam/Нэм га.png" alt="Нэм га">
+                            <p><b>Нэм га</b><span class="small-text">(200гр.)</span></p>
+                            <p><span class="textcolor">Обжаренные блинчики из рисовой бумаги с курицей, древесными грибами, вьетнамской вермишелью и овощами.</span></p>
+                            <div class="price-container">
+                                <p><b>300 рублей</b></p>
+                                <div id="controls_Нэм га">
+                                    <button class="add-button-size" onclick="cart.addItem('Нэм га', 300)">Добавить</button>
+                                    <button class="quantity-control" id="removeBtn_Нэм га" onclick="cart.decrementItem('Нэм га')" style="display: none;">-</button>
+                                    <span class="quantity-display" id="quantity_Нэм га" style="display: none;">1</span>
+                                    <button class="quantity-control" id="addBtn_Нэм га" onclick="cart.incrementItem('Нэм га', 300)" style="display: none;">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-dish">
+                    <div class="image-container">
+                        <div class="menu-item"> 
+                            <img src="images/Vietnam/Том Ям.png" alt="Том Ям">
+                            <p><b>Том Ям</b><span class="small-text">(400гр.)</span></p>
+                            <p><span class="textcolor">Кисло-острый суп с креветками, курицей, рыбой или другими морепродуктами.</span></p>
+                            <div class="price-container">
+                                <p><b>500 рублей</b></p>
+                                <div id="controls_Том Ям">
+                                    <button class="add-button-size" onclick="cart.addItem('Том Ям', 500)">Добавить</button>
+                                    <button class="quantity-control" id="removeBtn_Том Ям" onclick="cart.decrementItem('Том Ям')" style="display: none;">-</button>
+                                    <span class="quantity-display" id="quantity_Том Ям" style="display: none;">1</span>
+                                    <button class="quantity-control" id="addBtn_Том Ям" onclick="cart.incrementItem('Том Ям', 500)" style="display: none;">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-dish">
+                    <div class="image-container">
+                        <div class="menu-item"> 
+                            <img src="images/Vietnam/Као лау.png" alt="Као лау">
+                            <p><b>Као лау</b><span class="small-text">(300гр.)</span></p>
+                            <p><span class="textcolor">Популярное блюдо вьетнамской кухни, представляющее собой рисовую лапшу с мясом, овощами и соусом.</span></p>
+                            <div class="price-container">
+                                <p><b>400 рублей</b></p>
+                                <div id="controls_Као лау">
+                                    <button class="add-button-size" onclick="cart.addItem('Као лау', 400)">Добавить</button>
+                                    <button class="quantity-control" id="removeBtn_Као лау" onclick="cart.decrementItem('Као лау')" style="display: none;">-</button>
+                                    <span class="quantity-display" id="quantity_Као лау" style="display: none;">1</span>
+                                    <button class="quantity-control" id="addBtn_Као лау" onclick="cart.incrementItem('Као лау', 400)" style="display: none;">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <div class="menu-header">
+        <section id="menu">
+            <h2 id="ru" class="subtitle">Бурятская кухня</h2>
+            <p>Бурятская кухня основана на мясных блюдах, в основе которых в зимнее время преобладает говядина и конина, а в летнее — баранина</p>
+        </section>
+    </div>
+
+    <section class="popular-dishes full-screen-section">
+        <section class="popular-dishes">
+            <div class="grid-dishes">
+                <div class="card-dish">
+                    <div class="image-container">
+                        <div class="menu-item"> 
+                            <img src="images/Buryatia/Буузы.png" alt="Буузы">
+                            <p><b>Буузы</b><span class="small-text">(500гр.)</span></p>
+                            <p><span class="textcolor">Традиционное блюдо бурятской и монгольской кухни. Начинка у них исключительно мясная.</span></p>
+                            <div class="price-container">
+                                <p><b>350 рублей</b></p>
+                                <div id="controls_Буузы">
+                                    <button class="add-button-size" onclick="cart.addItem('Буузы', 350)">Добавить</button>
+                                    <button class="quantity-control" id="removeBtn_Буузы" onclick="cart.decrementItem('Буузы')" style="display: none;">-</button>
+                                    <span class="quantity-display" id="quantity_Буузы" style="display: none;">1</span>
+                                    <button class="quantity-control" id="addBtn_Буузы" onclick="cart.incrementItem('Буузы', 350)" style="display: none;">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-dish">
+                    <div class="image-container">
+                        <div class="menu-item"> 
+                            <img src="images/Buryatia/Бухлёр.png" alt="Бухлёр">
+                            <p><b>Бухлёр</b><span class="small-text">(600гр.)</span></p>
+                            <p><span class="textcolor">Традиционное бурятское блюдо из баранины. Это густой, но не жирный наваристый суп с зеленью, помидорами и картошкой.</span></p>
+                            <div class="price-container">
+                                <p><b>500 рублей</b></p>
+                                <div id="controls_Бухлёр">
+                                    <button class="add-button-size" onclick="cart.addItem('Бухлёр', 500)">Добавить</button>
+                                    <button class="quantity-control" id="removeBtn_Бухлёр" onclick="cart.decrementItem('Бухлёр')" style="display: none;">-</button>
+                                    <span class="quantity-display" id="quantity_Бухлёр" style="display: none;">1</span>
+                                    <button class="quantity-control" id="addBtn_Бухлёр" onclick="cart.incrementItem('Бухлёр', 500)" style="display: none;">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-dish">
+                    <div class="image-container">
+                        <div class="menu-item"> 
+                            <img src="images/Buryatia/Шулэн.png" alt="Шулэн">
+                            <p><b>Шулэн</b><span class="small-text">(500гр.)</span></p>
+                            <p><span class="textcolor">Традиционный бурятский суп из баранины. Бульон наваристый, мясо нежное, яичная лапша сытная и вкусная.</span></p>
+                            <div class="price-container">
+                                <p><b>450 рублей</b></p>
+                                <div id="controls_Шулэн">
+                                    <button class="add-button-size" onclick="cart.addItem('Шулэн', 450)">Добавить</button>
+                                    <button class="quantity-control" id="removeBtn_Шулэн" onclick="cart.decrementItem('Шулэн')" style="display: none;">-</button>
+                                    <span class="quantity-display" id="quantity_Шулэн" style="display: none;">1</span>
+                                    <button class="quantity-control" id="addBtn_Шулэн" onclick="cart.incrementItem('Шулэн', 450)" style="display: none;">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <script src="script.js"></script>
+    
+    <footer>
+        <p>&copy; 2025 Nakatani. Все права защищены.</p>
+    </footer>
+    
+</body>
+</html>
