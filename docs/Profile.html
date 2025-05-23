@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nakatani — Профиль</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="images/Nakatani.png" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f7f7f7;
+      color: #353535;
+    }
+
+    .container {
+      display: flex;
+      max-width: 90%;
+      margin: 100px auto;
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      overflow: hidden;
+      width: 80%;
+      height: 80%;
+    }
+
+    .sidebar {
+      width: 280px;
+      background-color: #343a40;
+      padding: 40px 25px;
+      color: #fff;
+    }
+
+    .sidebar button {
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 12px;
+      background-color: #495057;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .sidebar button:hover {
+      background-color: #6d6d6d;
+    }
+
+    .content {
+      flex: 1;
+      padding: 40px;
+      overflow-y: auto;
+      max-height: 80vh;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      box-sizing: border-box;
+      color: rgb(0, 0, 0);
+    }
+
+    .readonly-field {
+      padding: 10px;
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .error-msg {
+      color: red;
+      font-size: 14px;
+      display: none;
+      margin-top: 5px;
+    }
+
+    .save-msg {
+      color: green;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    #save-btn {
+      padding: 10px;
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #save-btn:hover {
+      background-color: #afafaf;
+    }
+
+    .logout-btn {
+      padding: 12px 20px;
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .logout-btn:hover {
+      background-color: #c82333;
+    }
+
+    .order-item {
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+
+    .order-item:hover {
+      transform: translateY(-2px);
+    }
+
+    .order-item ul {
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        margin: 10px;
+      }
+
+      .sidebar {
+        width: 100%;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .content {
+        padding: 20px;
+      }
+
+      .navbar-left, .navbar-right {
+        display: none;
+      }
+
+      .navbar-center {
+        margin: 0 auto;
+      }
+    }
+
+    /* Footer */
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 1px;
+    }
+
+    .footer-item {
+      width: 30%;
+      padding: 10px;
+    }
+
+    .footer-item h3 {
+      font-size: 10px;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .footer-item p {
+      font-size: 10px;
+      color: #ddd;
+      line-height: 1.5;
+    }
+
+    .footer-item p a {
+      color: #ddd;
+      text-decoration: none;
+    }
+
+    .footer-item p a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Шапка сайта -->
+    <header>
+        <nav>
+            <ul class="navbar">
+                <div class="navbar-left">
+                    <li><a href="login_register.html" class="button">Вход</a></li>
+                    <li><a href="Profile.html" class="button">Профиль</a></li>
+                    <li><a href="index.html" class="button">Главная</a></li>
+                </div>
+                <div class="navbar-center">
+                    <img src="images/Nakatani.png" alt="Логотип Nakatani" class="navbar-logo">
+                </div>
+                <div class="navbar-right">
+                    <li><a href="menu.html" class="button">Меню</a></li>
+                    <li><a href="Delivery terms.html" class="button">Условия доставки</a></li>
+                    <!-- Кнопка корзины в шапке -->
+                     <!-- Корзина -->
+                    <button id="cart-button" class="cart-button">
+                        Корзина (<span id="cartCount">0</span>)
+                    </button>
+                
+                    <!-- Модальное окно корзины -->
+                    <div id="cartModal" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Ваша корзина</h2>
+                                <span class="close" id="closeCart">&times;</span>
+                            </div>
+                            <div class="modal-body">
+                                <div id="cartContent" class="cart-items">
+                                    <div class="empty-cart">Корзина пуста</div>
+                                </div>
+                                <div class="cart-total">
+                                    Итого: <span id="cartTotal">0</span> ₽
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="checkout.html" class="checkout-button">Оформить заказ</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Модальное окно корзины -->
+     <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Ваша корзина</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="cart-items" class="cart-items">
+                    <!-- Товар будут добавляться сюда динамически -->
+                     <div class="empty-cart">Ваша корзина пуста</div>
+                </div>
+                <div class="modal-footer">
+                    <button id="checkout-button" class="checkout-button">Оформить заказ</button>
+                </div>
+            </div>
+        </div>
+     </div>
+
+<!-- Основной контейнер -->
+<div class="container">
+  <div class="sidebar">
+    <button onclick="showSection('account')">Учётная запись</button>
+    <button onclick="showSection('orders')">История заказов</button>
+    <button class="logout-btn" id="logout-btn">Выйти</button>
+  </div>
+
+  <div class="content">
+    <div id="account" class="section active">
+      <h2>Учётная запись</h2>
+
+      <div class="form-group">
+        <label><strong>Имя пользователя:</strong></label>
+        <p id="profile-username" class="readonly-field"></p>
+      </div>
+
+      <div class="form-group">
+        <label for="profile-email"><strong>Email:</strong></label>
+        <input type="email" id="profile-email" placeholder="Ваш email" />
+        <span id="email-error" class="error-msg">Некорректный email</span>
+      </div>
+
+      <div class="form-group">
+        <label for="profile-bio"><strong>О себе:</strong></label>
+        <textarea id="profile-bio" rows="4" placeholder="Расскажите о себе..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label><strong>Дата регистрации:</strong></label>
+        <p id="profile-reg-date" class="readonly-field"></p>
+      </div>
+
+      <button id="save-btn">Сохранить изменения</button>
+      <p id="save-status" class="save-msg"></p>
+    </div>
+
+    <div id="orders" class="section">
+      <h2>История заказов</h2>
+      <div id="orderHistory"></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2025 Nakatani. Все права защищены.</p>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const username = localStorage.getItem('loggedInUser');
+    if (!username) return window.location.href = 'login_register.html';
+
+    let userData = JSON.parse(localStorage.getItem(`user_${username}`));
+    if (!userData) return window.location.href = 'login_register.html';
+
+    if (!userData.regDate) {
+      userData.regDate = new Date().toLocaleDateString();
+      localStorage.setItem(`user_${username}`, JSON.stringify(userData));
+    }
+    document.getElementById('profile-username').textContent = username;
+    document.getElementById('profile-email').value = userData.email || '';
+    document.getElementById('profile-bio').value = userData.bio || '';
+    document.getElementById('profile-reg-date').textContent = userData.regDate;
+
+    document.getElementById('save-btn').addEventListener('click', function () {
+      const email = document.getElementById('profile-email').value;
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        document.getElementById('email-error').style.display = 'inline';
+        return;
+      }
+      document.getElementById('email-error').style.display = 'none';
+      userData.email = email;
+      userData.bio = document.getElementById('profile-bio').value;
+      localStorage.setItem(`user_${username}`, JSON.stringify(userData));
+      document.getElementById('save-status').textContent = "Изменения сохранены!";
+      setTimeout(() => document.getElementById('save-status').textContent = '', 3000);
+    });
+
+    document.getElementById('logout-btn').addEventListener('click', function () {
+      localStorage.removeItem('loggedInUser');
+      window.location.href = 'login_register.html';
+    });
+  });
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    if (id === 'orders') {
+      const username = localStorage.getItem('loggedInUser');
+      if (username) loadOrderHistory(username);
+    }
+  }
+
+  function loadOrderHistory(username) {
+    const legacyOrders = JSON.parse(localStorage.getItem(`orders_${username}`)) || [];
+    const newOrders = JSON.parse(localStorage.getItem('orderHistory')) || [];
+    const container = document.getElementById("orderHistory");
+
+    if (legacyOrders.length === 0 && newOrders.length === 0) {
+      container.innerHTML = "<p>У вас пока нет заказов.</p>";
+      return;
+    }
+
+    let html = '';
+
+    legacyOrders.forEach((order, index) => {
+      html += `
+        <div class="order-item">
+          <p><strong>📦 Заказ №${index + 1}</strong></p>
+          <p><strong>📅 Дата:</strong> ${order.date}</p>
+          <p><strong>🧾 Состав заказа:</strong></p>
+          <ul>${order.items.map(item => `<li>${item.name} × ${item.quantity} — ${item.price * item.quantity} ₽</li>`).join('')}</ul>
+          <p><strong>💰 Сумма:</strong> ${order.total} ₽</p>
+        </div>`;
+    });
+
+    newOrders.forEach((order, index) => {
+      html += `
+        <div class="order-item">
+          <p><strong>📦 Заказ №${index + 1}</strong></p>
+          <p><strong>📅 Дата:</strong> ${order.date}</p>
+          <p><strong>📍 Адрес:</strong> ${order.address}</p>
+          <p><strong>📞 Телефон:</strong> ${order.phone}</p>
+          <p><strong>💳 Оплата:</strong> ${order.paymentMethod === 'cash' ? 'Наличными' : 'Картой курьеру'}</p>
+          <p><strong>💬 Комментарий:</strong> ${order.comments || '—'}</p>
+          <p><strong>🧾 Состав заказа:</strong></p>
+          <ul>${order.items.map(item => `<li>${item.name} — ${item.price} ₽ × ${item.quantity}</li>`).join('')}</ul>
+          <p><strong>💰 Сумма:</strong> ${order.total} ₽</p>
+        </div>`;
+    });
+
+    container.innerHTML = html;
+  }
+</script>
+
+</body>
+</html>
