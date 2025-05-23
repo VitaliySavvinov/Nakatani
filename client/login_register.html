@@ -1,0 +1,184 @@
+<!-- login_register.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nakatani</title>
+    <link rel="icon" type="image/png" href="images/Nakatani.png">
+    <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url(images/background.png) no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .form-box {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      width: 100%;
+      max-width: 400px;
+      box-sizing: border-box;
+      transition: transform 0.3s ease;
+    }
+
+    .form-box:hover {
+      transform: scale(1.01);
+    }
+
+    .tab {
+      display: inline-block;
+      margin: 0 12px 25px;
+      font-weight: 600;
+      color: #666;
+      cursor: pointer;
+      padding-bottom: 6px;
+      border-bottom: 2px solid transparent;
+      transition: color 0.3s, border-bottom 0.3s;
+      font-size: 1rem;
+    }
+
+    .tab.active {
+      color: #1e1e1e;
+      border-bottom: 2px solid #1e1e1e;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-sizing: border-box;
+      font-size: 15px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    input:focus {
+      border-color: #2a2a2a;
+      box-shadow: 0 0 5px rgba(42, 42, 42, 0.2);
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background-color: #2a2a2a;
+      color: white;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease, transform 0.2s;
+    }
+
+    button:hover {
+      background-color: #444;
+      transform: scale(1.02);
+    }
+
+    .error {
+      color: #e63946;
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+
+    .success {
+      color: #2a9d8f;
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-box">
+  <div>
+    <span class="tab active" id="showLogin">Вход</span> |
+    <span class="tab" id="showRegister">Регистрация</span>
+  </div>
+
+  <div id="loginForm">
+    <input type="text" id="loginUsername" placeholder="Имя пользователя">
+    <input type="password" id="loginPassword" placeholder="Пароль">
+    <button onclick="login()">Войти</button>
+    <div id="loginError" class="error"></div>
+  </div>
+
+  <div id="registerForm" class="hidden">
+    <input type="text" id="registerUsername" placeholder="Имя пользователя">
+    <input type="password" id="registerPassword" placeholder="Пароль">
+    <button onclick="register()">Зарегистрироваться</button>
+    <div id="registerError" class="error"></div>
+  </div>
+</div>
+
+<script>
+  // Переключение между входом и регистрацией
+  document.getElementById('showLogin').onclick = () => {
+    document.getElementById('loginForm').classList.remove('hidden');
+    document.getElementById('registerForm').classList.add('hidden');
+    document.getElementById('showLogin').classList.add('active');
+    document.getElementById('showRegister').classList.remove('active');
+  };
+
+  document.getElementById('showRegister').onclick = () => {
+    document.getElementById('registerForm').classList.remove('hidden');
+    document.getElementById('loginForm').classList.add('hidden');
+    document.getElementById('showRegister').classList.add('active');
+    document.getElementById('showLogin').classList.remove('active');
+  };
+
+  function register() {
+    const username = document.getElementById('registerUsername').value.trim();
+    const password = document.getElementById('registerPassword').value;
+    const errorDiv = document.getElementById('registerError');
+
+    if (!username || !password) {
+      errorDiv.textContent = 'Заполните все поля.';
+      return;
+    }
+
+    if (localStorage.getItem(`user_${username}`)) {
+      errorDiv.textContent = 'Пользователь уже существует.';
+      return;
+    }
+
+    localStorage.setItem(`user_${username}`, JSON.stringify({ password }));
+    errorDiv.style.color = 'green';
+    errorDiv.textContent = 'Успешная регистрация! Перейдите на вкладку "Вход".';
+  }
+
+  function login() {
+    const username = document.getElementById('loginUsername').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    const errorDiv = document.getElementById('loginError');
+
+    const userData = JSON.parse(localStorage.getItem(`user_${username}`));
+
+    if (!userData) {
+      errorDiv.textContent = 'Пользователь не найден.';
+    } else if (userData.password !== password) {
+      errorDiv.textContent = 'Неверный пароль.';
+    } else {
+      localStorage.setItem('loggedInUser', username);
+      window.location.href = 'Profile.html';
+    }
+  }
+</script>
+
+</body>
+</html>
