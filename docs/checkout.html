@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="images/Nakatani.png" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Оформление заказа</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #222;
+      margin-bottom: 20px;
+    }
+
+    .order-summary,
+    form {
+      width: 100%;
+      max-width: 700px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 1em;
+      color: black;
+    }
+
+    .order-item:last-child {
+      border-bottom: none;
+    }
+
+    .order-total {
+      font-weight: bold;
+      font-size: 1.3em;
+      text-align: right;
+      margin-top: 20px;
+      color: black;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #444;
+      font-weight: 500;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #ffffff;
+      outline: none;
+    }
+
+    button {
+      background: #ffffff;
+      color: rgb(0, 0, 0);
+      border: none;
+      padding: 14px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #cccccc;
+    }
+
+    footer {
+      background-color: #222;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      width: 100%;
+      margin-top: 40px;
+    }
+
+    .payment-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .payment-options label {
+      display: flex;
+      align-items: center;
+      background-color: #f8f8f8;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px 15px;
+      transition: background 0.3s ease, border 0.3s ease;
+      cursor: pointer;
+    }
+
+.payment-options input[type="radio"] {
+  margin-right: 10px;
+  transform: scale(1.2);
+}
+
+.payment-options input[type="radio"]:disabled + span {
+  color: #aaa;
+}
+
+.payment-options input[type="radio"]:checked + span {
+  font-weight: bold;
+}
+
+.payment-options label:hover {
+  background-color: #eaeaea;
+}
+
+.center-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#confirmButton {
+  padding: 14px 40px;
+  font-size: 1.2em;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#confirmButton:hover {
+  background-color: #ffffff;
+}
+
+.notification {
+  display: none;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.notification.show {
+  display: block;
+}
+  </style>
+</head>
+<body>
+  <h1>Оформление заказа</h1>
+  <div class="order-summary">
+    <h2>Ваш заказ</h2>
+    <div id="orderItems"></div>
+    <div class="order-total"> <span id="orderTotal">0</span> </div>
+  </div>
+  <form id="orderForm">
+    <h2>Данные для доставки</h2>
+    <div class="form-group">
+      <label for="phone">Телефон:</label>
+      <input type="tel" id="phone" required />
+    </div>
+    <div class="form-group">
+      <label for="address">Адрес доставки:</label>
+      <textarea id="address" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="comments">Комментарий к заказу:</label>
+      <textarea id="comments"></textarea>
+    </div>
+    <div class="form-group">
+        <label>Способ оплаты:</label>
+        <label><input type="radio" name="payment" value="cash" checked> Наличными</label><br>
+        <label><input type="radio" name="payment" value="card"> Картой курьеру</label><br>
+      </div>
+
+    <div class="center-button">
+        <button type="button" id="confirmButton">Подтвердить заказ</button>
+      </div>
+      
+      <div id="orderSuccessMessageContainer" style="display:none; color: green; font-size: 18px;">
+  Спасибо за ваш заказ! Он был успешно оформлен.
+</div>
+
+<div id="orderDetailsContainer">
+  <!-- Данные о заказе будут отображаться здесь -->
+</div>
+
+  </form>
+
+  <footer>
+    <p>&copy; 2025 Nakatani. Все права защищены.</p>
+  </footer>
+
+  
+  <script src="script.js"></script>
+  
+</body>
+</html>

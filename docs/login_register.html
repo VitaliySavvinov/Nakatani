@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nakatani</title>
+<link rel="icon" type="image/png" href="images/Nakatani.png" />
+<link rel="stylesheet" href="style.css">
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url(images/background.png) no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+
+  .form-box {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px 25px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 360px;
+    box-sizing: border-box;
+  }
+
+  .tab-container {
+    display: flex;
+    justify-content: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  button.tab {
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-weight: 500;
+    color: #444;
+    padding: 4px 0;
+    font-size: 1rem;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+  }
+
+  button.tab:hover {
+    color: #000;
+  }
+
+  button.tab.active {
+    font-weight: 600;
+    color: #000;
+    border-bottom: 2px solid #000;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease;
+  }
+
+  input:focus {
+    border-color: #2a9d8f;
+    outline: none;
+  }
+
+  button.action-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #2a2a2a;
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    margin-top: 10px;
+    transition: background-color 0.2s ease;
+  }
+
+  button.action-btn:hover {
+    background-color: #444;
+  }
+
+  .error {
+    color: #e63946;
+    font-size: 0.85rem;
+    margin-top: 5px;
+  }
+
+  .success {
+    color: #2a9d8f;
+    font-size: 0.85rem;
+    margin-top: 5px;
+  }
+
+  .hidden {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="form-box">
+  <div class="tab-container">
+    <button class="tab active" id="showLogin" type="button">Вход</button>
+    <button class="tab" id="showRegister" type="button">Регистрация</button>
+  </div>
+
+  <!-- Форма для входа -->
+  <form id="loginForm" class="hidden">
+    <input id="username" placeholder="Имя пользователя" required />
+    <input id="password" type="password" placeholder="Пароль" required />
+    <button class="action-btn" type="submit" id="loginBtn">Войти</button>
+    <div id="loginError" class="error"></div>
+  </form>
+
+  <!-- Форма для регистрации -->
+  <form id="registerForm">
+    <input id="registerUsername" placeholder="Имя пользователя" required />
+    <input id="registerPassword" type="password" placeholder="Пароль" required />
+    <button class="action-btn" type="submit" id="registerBtn">Зарегистрироваться</button>
+    <div id="registerError" class="error"></div>
+  </form>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
